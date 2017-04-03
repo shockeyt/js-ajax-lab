@@ -17,6 +17,13 @@ $("form").on("submit", function(event){
 
 var ajax = $.get('https://ga-cat-rescue.herokuapp.com/api/cats')
 	.done(function(data){
+		var separateCats = JSON.parse(data);
+		for (var i = 0; i < separateCats.length; i++) {
+			var catList = document.createElement('li');
+
+			catList.append(separateCats[i].name + " - " + separateCats[i].note);
+			cats.append(catList);
+		}
 	console.log(data);
 	});
 
@@ -26,9 +33,3 @@ var ajax = $.get('https://ga-cat-rescue.herokuapp.com/api/cats')
 
 
 });
-
-// var looper = function() {
-// 	for (var i = 0; i < Things.length; i++) {
-// 		Things[i]
-// 	}
-// }
