@@ -7,7 +7,7 @@ var catnote = $('#cat-note').val();
 
 function makeResults() {
 	var results = document.createElement('li');
-	results.innerHTML = 'Cats';
+	// results.innerHTML = 'Cats';
 	results.className = 'results';
 	cats.appendChild(results);
 }
@@ -35,7 +35,21 @@ $("form").on("submit", function(event){
 	var catnote = $('#cat-note').val();
 	newlist.append(catname + " - " + catnote);
 	$('.results').append(newlist);
+	var newCat = {
+		"name": catname,
+		"note": catnote
+	};
+	
+	// console.log(newCat);
+	var newCatString = JSON.stringify(newCat);
+	console.log(newCatString);
 
+	$.ajax({
+		url: 'https://ga-cat-rescue.herokuapp.com/api/cats',
+		type: 'POST',
+		data: newCatString
+	});
+	// var ajax2 = $.get('https://ga-cat-rescue.herokuapp.com/api/cats')
 // var catinfo = ajax.innerHTML;
 // JSON.stringify(ajax);
 // $('.results').add(ajax);
